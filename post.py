@@ -6,6 +6,9 @@ os.chdir("/home/pi/SouthlakeAWOS")
 # Sent local IP address for logging
 import post_ip
 
+# Send weather data
+import post_weather
+
 # Take Image
 os.system("./take_image.sh")
 
