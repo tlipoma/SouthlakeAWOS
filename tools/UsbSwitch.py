@@ -5,6 +5,7 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 SWITCH_PID = 29987
+SWITCH_VID = '7523'
 SWITCH_ON = 'A00101A2'.decode('hex')
 SWITCH_OFF = 'A00100A1'.decode('hex')
 
@@ -23,11 +24,11 @@ class USBSwitch(object):
         switches = []
         for port in _ports:
             if type(port) == tuple:
-                compare = port[0]
+                if port[2].split(':')[2] == SWITCH_VID:
+                    switches.append(port[0])
             else:
-                compare = port.pid
-            if compare == SWITCH_PID:
-                switches.append(port.device)
+                if port.pid == SWITCH_PID:
+                    switches.append(port.device)
         return switches
 
     def switches_off(self):
