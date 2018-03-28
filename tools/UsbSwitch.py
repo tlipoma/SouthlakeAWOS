@@ -22,7 +22,11 @@ class USBSwitch(object):
         _ports = list_ports.comports()
         switches = []
         for port in _ports:
-            if port.pid == SWITCH_PID:
+            if type(port) == tuple:
+                compare = port[0]
+            else:
+                compare = port.pid
+            if compare == SWITCH_PID:
                 switches.append(port.device)
         return switches
 
@@ -43,4 +47,4 @@ def send_serial_command(port, command):
         ser.write(command)
         ser.close()
     except:
-        LOGGER.debug('Error in serial communications')
+        LOGGER.debug('Error in serial communications... Might not have permissions...')
