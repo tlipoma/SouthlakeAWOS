@@ -4,6 +4,10 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
+
+DEFAULT_IMAGE_LOCATION = 'images/weather.jpg'
+
+
 def caputure():
     # open Camera
     cam = VideoCapture(0)
@@ -26,7 +30,7 @@ def save_image(img, filename):
     return
 
 
-def capture_and_save(filename):
+def capture_and_save(filename=DEFAULT_IMAGE_LOCATION):
     img = caputure()
     if img is not None:
         save_image(img, filename)

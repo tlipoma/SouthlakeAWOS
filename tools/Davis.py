@@ -8,7 +8,7 @@ import logging
 LOGGING = logging.getLogger(__name__)
 
 STATION_PID = 8963
-STATION_VID = '7523'
+STATION_VID = '2303'
 
 
 class Davis(object):
@@ -45,17 +45,18 @@ class Davis(object):
                     station = port[0]
             else:
                 if port.pid == STATION_PID:
-                    station = (port.device)
+                    station = port.device
         return station
 
     def close(self):
-        if self.conn.is_open:
+        if self.conn and self.conn.is_open:
             self.conn.close()
 
     def open(self):
         if not self.conn:
             if not self.station_port:
                 LOGGING.debug('No Weather station found! No port listed')
+                return
             else:
                 self.conn = serial.Serial(self.station_port, 19200, timeout=1)
         if not self.conn.is_open:
@@ -117,6 +118,14 @@ class Davis(object):
         self.close()
 
     def get_weather_data(self):
+        weather_data = {}
+        weather_data['wind_speed'] = 99.9
+        weather_data['average_wind_speed'] = 99.9
+        weather_data['wind_direction'] = 99.9
+        weather_data['outside_temp'] = 99.9
+        weather_data['inside_temp'] = 99.9
+        weather_data['humidity'] = 99.9
+        weather_data['pressure'] = 99.9
         self.update_data()
         if self.updated:
             weather_data = {}
@@ -127,8 +136,6 @@ class Davis(object):
             weather_data['inside_temp'] = self.temp_inside
             weather_data['humidity'] = self.humidity
             weather_data['pressure'] = self.pressure
-
-            return weather_data
         else:
             LOGGING.debug('Failed to update weather')
-            return None
+        return weather_data

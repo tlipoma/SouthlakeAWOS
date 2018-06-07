@@ -7,5 +7,4 @@ SERVER = 'http://104.236.10.146:5001/postip'
 ip = ni.ifaddresses('wlan0')[2][0]['addr']
 
 # Send ip
-r = requests.post(SERVER, data = {'ip_address' : ip})
- 
+r = requests.post(SERVER, data={'ip_address': ip})
