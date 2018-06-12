@@ -3,8 +3,8 @@ import os
 
 WEATHER_URL = 'http://www.southlakeweather.net/weatherdata'
 IMG_URL = 'http://www.southlakeweather.net/upload'
-WEATHER_URL = 'http://0.0.0.0:5050/weatherdata'
-IMG_URL = 'http://0.0.0.0:5050/upload'
+#WEATHER_URL = 'http://0.0.0.0:5050/weatherdata'
+#IMG_URL = 'http://0.0.0.0:5050/upload'
 DEFAULT_IMAGE_LOCATION = 'images/weather.jpg'
 
 
