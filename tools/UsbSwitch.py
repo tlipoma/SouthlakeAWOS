@@ -41,6 +41,18 @@ class USBSwitch(object):
             LOGGER.debug("Turning ON switch %s" % (i))
             send_serial_command(self.switches[i], SWITCH_ON)
 
+    def on(self, index):
+        if index > (len(self.switches) - 1):
+            LOGGER.debug('Index of switch not found')
+            return
+        send_serial_command(self.switches[index], SWITCH_ON)
+
+    def off(self, index):
+        if index > (len(self.switches) - 1):
+            LOGGER.debug('Index of switch not found')
+            return
+        send_serial_command(self.switches[index], SWITCH_OFF)
+
 
 def send_serial_command(port, command):
     try:
