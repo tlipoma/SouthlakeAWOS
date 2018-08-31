@@ -1,5 +1,6 @@
 from cv2 import imwrite, VideoCapture
 import logging
+import time
 
 LOGGER = logging.getLogger(__name__)
 
@@ -16,7 +17,9 @@ def caputure():
         return None
 
     # capture image
-    status, img = cam.read()
+    for i in range(10):
+        status, img = cam.read()
+        time.sleep(0.5)
     if not status:
         LOGGER.debug('FAiLED to capture image!!!')
         return None
