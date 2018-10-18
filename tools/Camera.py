@@ -17,9 +17,8 @@ def caputure():
         return None
 
     # capture image
-    for i in range(10):
+    for i in range(100):
         status, img = cam.read()
-        time.sleep(0.5)
     if not status:
         LOGGER.debug('FAiLED to capture image!!!')
         return None
